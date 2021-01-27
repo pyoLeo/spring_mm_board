@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.bit.board.mapper.BoardMapper">
+
+	<select id="getList" resultType="edu.bit.board.vo.BoardVO">
+   <![CDATA[
+      select bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent from mvc_board2 order by bGroup desc, bStep asc
+   ]]>
+	</select>
+
+	<!-- 위랑 같은거 <select id="getTotalCount" resultType="int"> select count(*) 
+		from mvc_board2 order by bGroup desc, bStep asc //세미콜론 찍으면 안됨!! </select> -->
+
+	<insert id="insert">
+   <![CDATA[
+   		insert into mvc_board2 (bId, bName, bTitle, bContent, bHit, bGroup, bStep, bIndent) values (mvc_board2_seq.nextval, #{bName}, #{bTitle}, #{bContent}, 0, mvc_board2_seq.currval, 0, 0)
+   ]]>
+	</insert>
+
+</mapper>
